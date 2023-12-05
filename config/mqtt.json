@@ -1,7 +1,7 @@
 {
-    "server": "[HA_MQTT_IP]",
+    "server": "192.168.5.73",
     "port": "1883",
-    "topic": "homeassistant",
+    "topic": "voltronic",
     "devicename": "voltronic",
     "username": "",
     "password": "",
