@@ -1,3 +1,17 @@
+This is a work in progress, it is not suitable for use as of now.
+
+
+
+
+
+
+
+
+
+
+
+
+
 # A Docker based Home Assistant interface for MPP/Voltronic Solar Inverters 
 
 **Docker Hub:** [`bushrangers/ha-voltronic-mqtt:latest`](https://hub.docker.com/r/bushrangers/ha-voltronic-mqtt/)
