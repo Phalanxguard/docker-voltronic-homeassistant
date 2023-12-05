@@ -9,16 +9,18 @@
 #include <fcntl.h>
 #include <termios.h>
 
-cInverter::cInverter(std::string devicename, int qpiri, int qpiws, int qmod, int qpigs) {
+cInverter::cInverter(std::string devicename, int qpiri, int qpiws, int qmod, int qpigs, int qpigs2) {
     device = devicename;
     status1[0] = 0;
     status2[0] = 0;
+	status3[0] = 0;
     warnings[0] = 0;
     mode = 0;
     qpiri = qpiri;
     qpiws = qpiws;
     qmod = qmod;
     qpigs = qpigs;
+	qpigs2 = qpigs2;
 }
 
 string *cInverter::GetQpigsStatus() {
@@ -28,9 +30,17 @@ string *cInverter::GetQpigsStatus() {
     return result;
 }
 
+
 string *cInverter::GetQpiriStatus() {
     m.lock();
     string *result = new string(status2);
+    m.unlock();
+    return result;
+}
+
+string *cInverter::GetQpigs2Status() {
+    m.lock();
+    string *result = new string(status3);
     m.unlock();
     return result;
 }
@@ -186,6 +196,16 @@ void cInverter::poll() {
                 strcpy(status2, (const char*)buf+1);
                 m.unlock();
                 ups_qpiri_changed = true;
+            }
+        }
+		
+		// reading status (QPIGS2)
+        if (!ups_qpigs2_changed) {
+            if (query("QPIGS2", qpigs2)) {
+                m.lock();
+                strcpy(status3, (const char*)buf+1);
+                m.unlock();
+                ups_qpigs2_changed = true;
             }
         }
 
