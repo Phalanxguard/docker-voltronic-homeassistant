@@ -167,7 +167,7 @@ bool cInverter::query(const char *cmd, int replysize) {
 
 void cInverter::poll() {
     int n,j;
-    extern const int qpiri, qpiws, qmod, qpigs;
+    extern const int qpiri, qpiws, qmod, qpigs, qpigs2;
 
     while (true) {
 
